@@ -1,0 +1,22 @@
+<h2>Students</h2>
+<div>
+  <label>Student name:</label> <input #studentName />
+  <button (click)="add(studentName.value); studentName.value=''">
+    Add
+  </button>
+</div>
+<ul class="students">
+  <li *ngFor="let student of students" (click)="onSelect(student)"
+      [class.selected]="student === selectedStudent">
+    <span class="badge">{{student.id}}</span>
+    <span>{{student.fullName}}</span>
+    <button class="delete"
+      (click)="delete(student); $event.stopPropagation()">x</button>
+  </li>
+</ul>
+<div *ngIf="selectedStudent">
+  <h2>
+    Student: {{selectedStudent.fullName | uppercase}} 
+  </h2>
+  <button (click)="gotoDetail()">View Details</button>
+</div>
